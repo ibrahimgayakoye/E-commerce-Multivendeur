@@ -1,0 +1,73 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Liste des utilisateurs{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            {% include "_partials/_adminnav.html.twig" %}
+            <main class="col-9 border border-light bg-white p-2">
+                <h1>Liste des utilisateurs</h1>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Prénom</th>
+                            <th>Nom</th>
+                            <th>Email</th>
+                            <th>Rôles</th>
+                            <th>Vérifié</th>
+                            <th>Balance<th>
+                            <th>Phone</th>
+                           
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in users %}
+                            <tr>
+                                <td>{{ user.id }}</td>
+                                <td>{{ user.firstname }}</td>
+                                <td>{{ user.lastname }}</td>
+                                <td>{{ user.email }}</td>
+                                <td>
+                                    {% for role in user.roles %}
+                                        {% if role == "ROLE_ADMIN" %}
+                                            {% set name = "Administrateur" %}
+                                            {% set color = "danger" %}
+                                        {% elseif role == "ROLE_USER" %}
+                                            {% set name = "Client" %}
+                                            {% set color = "primary" %}
+                                        {% else %}
+                                            {% set name = "SELLER" %}
+                                            {% set color = "success" %}
+                                        {% endif %}
+                                        <span class="badge bg-{{ color }}">{{ name }}</span>
+                                    {% endfor %}
+                                    
+                                </td>
+
+                                <td>
+                                    <a href="{{path('admin_users_verif',{id:user.id})}}">
+                                    {% if user.isVerified == true %}
+                                            {% set name = "Verifie" %}
+                                            {% set color = "primary" %}
+                                        {% elseif user.isVerified == false %}
+                                            {% set name = "Bloquer" %}
+                                            {% set color = "warning" %}
+                                        {% endif %}
+                                        <span class="badge bg-{{ color }}">{{ name }}</span>
+                                   </a>
+                                </td>
+                                <td>{{ user.balance }}</td>
+                                 {% if user.phone is defined %}
+                                 <td>{{ user.phone }}</td>
+                                 {% endif %}
+                                
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </main>
+        </div>
+    </div>
+{% endblock %}

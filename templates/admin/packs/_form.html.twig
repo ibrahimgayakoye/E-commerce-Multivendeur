@@ -1,0 +1,12 @@
+{{ form_start(packForm) }}
+    {{ form_row(packForm.name) }}
+    {{ form_row(packForm.description) }}
+    {{ form_row(packForm.amount) }}
+    {{ form_row(packForm.duration) }}
+    
+
+
+   
+
+    <button type="submit" class="btn btn-primary">{{ button_label|default('Ajouter') }}</button>
+{{ form_end(packForm) }}

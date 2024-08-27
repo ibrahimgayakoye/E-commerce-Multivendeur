@@ -1,0 +1,63 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Liste des utilisateurs{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            {% include "_partials/_adminnav.html.twig" %}
+            <main class="col-9 border border-light bg-white p-2">
+                <h1>Liste des utilisateurs</h1>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Reference</th>
+                            <th>Prénom</th>
+                            <th>Nom</th>
+                            <th>Email</th>
+                            <th>Date</th>
+                            <th>Methode</th>
+                            <th>Rôles</th>
+                           
+                        </tr>
+                    </thead>
+                    <tbody>
+                     
+                        {% for subscriber in subscribers %}
+                           {% if subscriber.users.id is defined %}
+                            <tr>
+                                <td>{{ subscriber.users.id }}</td>
+                                 <td>{{ subscriber.reference }}</td>
+                                <td>{{ subscriber.users.firstname }}</td>
+                                <td>{{ subscriber.users.lastname }}</td>
+                                <td>{{ subscriber.users.email }}</td>
+                                <td>{{ subscriber.getcreatedAt()|date('d-m-Y H:i:s') }}</td>
+                                <td>{{ subscriber.method }}</td>
+                                <td>
+                                    {% for role in subscriber.users.roles %}
+                                        {% if role == "ROLE_ADMIN" %}
+                                            {% set name = "Administrateur" %}
+                                            {% set color = "danger" %}
+                                        {% elseif role == "ROLE_USER" %}
+                                            {% set name = "Client" %}
+                                            {% set color = "primary" %}
+                                        {% else %}
+                                            {% set name = "SELLER" %}
+                                            {% set color = "success" %}
+                                        {% endif %}
+                                        <span class="badge bg-{{ color }}">{{ name }}</span>
+                                    {% endfor %}
+                                    
+                                </td>
+                                
+                            </tr>
+                            {% endif %}
+                        {% endfor %}
+                        
+                    </tbody>
+                </table>
+            </main>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "base.html.twig" %}
+
+{% block title %} Mes addresses{% endblock %}
+
+{% block body %}
+   <main class="container">
+      <section class="row">
+      {% include "_partials/_userprofilnav.html.twig" %}
+         <div class="col-12">
+            <h1>Modifier une addresse</h1>
+            {% include('addresses/_form.html.twig') with {'button_label':'Modifier'} %}
+         </div>
+      </section>
+   </main>
+{% endblock %} 

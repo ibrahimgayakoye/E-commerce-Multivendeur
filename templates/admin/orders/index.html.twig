@@ -1,0 +1,82 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Administration{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            {% include "_partials/_adminnav.html.twig" %}
+            <main class="col-9 border border-light bg-white p-2">
+                <h1>Administration</h1>
+                <h3>Liste des  commandes</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>email</th>
+                            <th>Nom</th>
+                            <th>Prenom</th>
+                            <th>Reference</th>
+                            <th>Addresse de livraison</th>
+                            <th>paiment</th>
+                            <th>Total</th>
+                            <th>Seller</th>
+                            <th>Date</th>
+                            <th>Statut</th> 
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for order in orders %}
+                          {% if order.isPaid == true %} 
+                            <tr>
+                               <td>{{ order.users.email}}</td>
+                               <td>{{ order.users.firstname}}</td>
+                               <td>{{ order.users.lastname}}</td>
+                               <td>{{ order.Reference}}</td>
+                               <td> {{ order.delivery|replace({'</br>':' '}) }} </td>
+                               <td>{{ order.method }}</td>
+                                <td>{{ order.total }} MAD</td>
+                                <td>{{ order.getcreatedAt()|date('d-m-Y H:i:s') }}</td>
+                                <td>
+                                    {% if order.status.name is defined and order.status.name == "En cours" %}
+                                            {% set name = " en cours" %}
+                                            {% set color = "primary" %}
+                                    {% endif %}
+                                     {% if order.status.name is defined and order.status.name == "Termine"  %}
+                                            {% set name = "accepte" %}
+                                            {% set color = "success" %}
+                                    {% endif %}
+                                    {% if order.status.name is defined and order.status.name == "Annule" %}
+                                            {% set name = "recjected" %}
+                                            {% set color = "warning" %}
+                                    {% endif %}
+                                        <span class="badge bg-{{ color }}">{{ name }}</span>
+                                 </td>
+
+                                <td>
+                                    <a href="{{ path('admin_details', {reference: order.reference})}}" class="btn btn-primary">Details</a>
+                                </td>
+                                
+                                <td>
+                                    <a href="{{ path('admin_update_status', {id: order.id})}}" class="btn btn-primary">update statut</a>
+                                </td>
+                                {% if order.status.name is defined and order.status.name == "Termine"  %}
+                                {% if order.isWithdraw == false %}
+                                 <td>
+                                    <a href="{{ path('admin_orders_withdraw', {reference: order.reference})}}" class="btn btn-primary">withdraw</a>
+                                </td>
+                                {% else %}
+                                  <td>
+                                    <p class="btn btn-warning">withdrawed</p>
+                                </td>
+                                {% endif %}
+                                {% endif %}
+                            </tr>
+                             {% endif %}
+                        {% endfor %}
+                    </tbody>
+                    
+                </table>
+            </main>
+        </div>
+    </div>
+{% endblock %}

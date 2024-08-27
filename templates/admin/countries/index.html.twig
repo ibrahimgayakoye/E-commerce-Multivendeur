@@ -1,0 +1,33 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Liste des produits{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            {% include "_partials/_adminnav.html.twig" %}
+            <main class="col-9 border border-light bg-white p-2">
+                <h1>Liste des produits</h1>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nom</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for country in countries %}
+                            <tr>
+                                <td>{{ country.id }}</td>
+                                <td>{{ country.name }}</td>
+                                <td>
+                                    <a href="{{ path('admin_countries_edit', {id: country.id})}}" class="btn btn-primary">Modifier</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </main>
+        </div>
+    </div>
+{% endblock %}

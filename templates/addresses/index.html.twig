@@ -1,0 +1,49 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Liste des addresses{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+           {% include "_partials/_userprofilnav.html.twig" %}
+            <main class="col-9 border border-light bg-white p-2">
+                <h1>Liste des addresses</h1>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Titre</th>
+                            <th>Nom</th>
+                            <th>Prenom</th>
+                            <th>Addresse</th>
+                            <th>Code postal</th>
+                            <th>pays</th>
+                            <th>Ville</th>
+                            <th>Telephone</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                       {% for addresse in addresses %}
+                            <tr>
+                                <td>{{ addresse.title }}</td>
+                                <td>{{ addresse.firstname }}</td>
+                                <td>{{ addresse.lastname }}</td>
+                                <td>{{ addresse.address }}</td>
+                                <td>{{ addresse.zipcode }}</td>
+                                <td>{{ addresse.country }}</td>
+                                <td>{{ addresse.city }}</td>
+                                <td>{{ addresse.phone }}</td>
+                                <td>
+                                    <a href="{{ path('address_edit', {id: addresse.id})}}" class="btn btn-success">Modifier</a>
+                                <td>
+                                    <a href="{{ path('address_delete', {id: addresse.id})}}" class="btn btn-danger">Supprimer</a>
+                                </td>
+                                </td>
+                            </tr>
+                         {% endfor %}
+                    </tbody>
+                </table>
+            </main>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,68 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Détails de
+	{{ product.name }}
+{% endblock %}
+
+{% block body %}
+	<div class="site-section m-4">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6">
+					<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+						<div class="carousel-indicators">
+							{% for iteration in 1..product.images|length %}
+								<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ iteration - 1 }}" {{ (loop.first ) ?'class="active" aria-current="true"' : '' }} aria-label="Slide {{ iteration }}"></button>
+							{% endfor %}
+						</div>
+						<div class="carousel-inner">
+							{% for image in product.images %}
+								<div class="carousel-item {{ (loop.first ) ? 'active' : '' }}">
+									<img src="{{ asset('assets/uploads/products/mini/300x300-') ~ image.name }}" class="d-block w-100" alt="{{ product.name }}">
+								</div>
+							{% endfor %}
+						</div>
+						<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+							<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+							<span class="visually-hidden">Previous</span>
+						</button>
+						<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+							<span class="carousel-control-next-icon" aria-hidden="true"></span>
+							<span class="visually-hidden">Next</span>
+						</button>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<h2 class="text-black">{{ product.name }}</h2>
+					<p>{{ product.description }}</p>
+					<p>
+						<strong class="text-primary h4">{{ product.price }}
+							MAD</strong>
+					</p>
+
+                     <a href="{{path('admin_winning_products_edit',{id: product.id} )}}" class="btn btn-primary mb-4" class="btn btn-success">modifier et enregistrer comme winningproduct</a>
+
+					
+
+					<div class="card text-center">
+
+						<div class="card-header bg-primary ">Information du vendeur</div>
+						<div class="card-body">
+							<h5 class="card-title">{{ product.user.firstname }} - {{ product.user.lastname }}</h5>
+							<p class="card-text text-left">{{ product.user.email }}</p>
+							{% if product.user.phone is defined %}
+							<a href="#" class="btn btn-primary">{{ product.user.phone }}</a>
+							{% endif %}
+
+
+						</div>
+					</div>
+
+				</div>
+
+
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

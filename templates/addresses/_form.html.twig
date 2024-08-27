@@ -1,0 +1,12 @@
+{{ form_start(addressForm) }}
+    {{ form_row(addressForm.title) }}
+    {{ form_row(addressForm.firstname) }}
+    {{ form_row(addressForm.lastname) }}
+    {{ form_row(addressForm.company) }}
+    {{ form_row(addressForm.address) }}
+    {{ form_row(addressForm.zipcode) }}
+    {{ form_row(addressForm.country) }}
+    {{ form_row(addressForm.city) }}
+    {{ form_row(addressForm.phone) }}
+     <button type="submit" class="btn" style="background-color:#1A237E" ><p style="height:7px" class="text-white">{{ button_label|default('Ajouter') }}</p></button>
+{{ form_end(addressForm) }}

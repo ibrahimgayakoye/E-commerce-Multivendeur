@@ -1,0 +1,103 @@
+{% extends 'base.html.twig' %}
+{% block title %}Register{% endblock %}
+{% block body%}
+  <section class="w-100 p-4 d-flex justify-content-center pb-4 border">
+    <div style="width: 26rem;">
+      <!-- Pills navs -->
+      <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
+        <li class="nav-item" role="presentation">
+          <a class="nav-link active" id="tab-login" data-mdb-toggle="pill" href="#pills-login" role="tab" aria-controls="pills-login" aria-selected="true">Registration</a>
+        </li>
+      </ul>
+      <!-- Pills navs -->
+
+      <!-- Pills content -->
+      <div class="tab-content">
+        <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
+          {{ form_start(registrationForm) }}
+
+          <div class="my-custom-class-for-errors">
+            {{ form_errors(registrationForm) }}
+          </div>
+
+          <!-- Name input -->
+          <div class="row">
+            <div class="col">
+              {{form_row(registrationForm.roles)}}
+            </div>
+            {% do 
+              registrationForm.roles.setRendered %}
+
+          </div>
+
+          <!-- Name input -->
+          <div class="form-outline mb-4">
+            <input type="text" class="form-control" id="{{ registrationForm.firstname.vars.full_name }}" name="{{ registrationForm.firstname.vars.full_name }}" placeholder="Firstname" autocomplete="firstname">
+            <div class="my-custom-class-for-errors">
+              {{ form_errors(registrationForm.firstname) }}
+            </div>
+            {% do 
+              registrationForm.firstname.setRendered %}
+            <label class="form-label" for="registerName">Name</label>
+          </div>
+
+          <!-- Username input -->
+          <div class="form-outline mb-4">
+            <input type="text" name="{{ registrationForm.lastname.vars.full_name }}" id="{{ registrationForm.lastname.vars.full_name }}" class="form-control" placeholder="lastname">
+            <div class="my-custom-class-for-errors">
+              {{ form_errors(registrationForm.lastname) }}
+            </div>
+            {% do 
+              registrationForm.lastname.setRendered %}
+            <label class="form-label" for="registerUsername">Username</label>
+          </div>
+
+          <div class="form-outline mb-4">
+            <input type="text" name="{{ registrationForm.phone.vars.full_name }}" id="{{ registrationForm.phone.vars.full_name }}" class="form-control" placeholder="Phone"/>
+            <div class="my-custom-class-for-errors">
+              {{ form_errors(registrationForm.phone) }}
+            </div>
+            {% do 
+              registrationForm.phone.setRendered %}
+            <label class="form-label" for="registerPhone">Phone</label>
+          </div>
+
+          <!-- Email input -->
+          <div class="form-outline mb-4">
+            <input type="email" name="{{ registrationForm.email.vars.full_name }}" id="{{ registrationForm.email.vars.full_name }}" class="form-control" placeholder="email"/>
+            <div class="my-custom-class-for-errors">
+              {{ form_errors(registrationForm.email) }}
+            </div>
+            {% do 
+              registrationForm.email.setRendered %}
+            <label class="form-label" for="registerEmail">Email</label>
+          </div>
+
+          <!-- Password input -->
+          <div class="mb-4">
+
+            {{
+      form_row(registrationForm.plainPassword, {
+        'attr' :{'class': 'form-control'}, label:"password"
+            })
+    }}
+
+          </div>
+
+          <!-- Checkbox -->
+          <div class="form-check d-flex justify-content-center mb-4">
+            {{ form_row(registrationForm.RGPDConsent,{label:"consent"} ) }}
+            <label class="form-check-label" for="registerCheck">
+              I have read and agree to the terms
+            </label>
+          </div>
+
+          <!-- Submit button -->
+          <button type="submit" class="btn text-white btn-block mb-3" style="background-color:#1A237E">Register</button>
+          {{ form_end(registrationForm) }}
+        </div>
+
+      </div>
+      <!-- Pills content -->
+    </section>
+  {% endblock %}

@@ -1,0 +1,268 @@
+{% if not is_granted('ROLE_SELLER') %}
+<!--Section: Content-->
+<section id="pricing" class="text-center">
+  <h4 class="mb-4">
+    <strong>Pricing</strong>
+  </h4>
+
+  <div class="btn-group mb-4" role="group" aria-label="Basic example">
+    <button type="button" class="btn  active"style="background-color:#1A237E" ><p class="text-white text-center">Monthly billing</p></button>
+    <button type="button" class="btn btn-primary">
+      Annual billign
+      <small>(2 months FREE)</small>
+    </button>
+  </div>
+
+  <div class="row gx-lg-5 justify-content-center">
+
+    <!--Grid column-->
+
+    <!--Grid column-->
+    {% for pack in packs %}
+      {% if pack.name == "Pack Silver" %}
+        <div class="col-lg-3 col-md-6 mb-4">
+          <!-- Card -->
+          <div class="card border border-primary">
+
+            <div class="card-header bg-white py-3">
+              <p class="text-uppercase small mb-2">
+                <strong>{{ pack.name }}</strong>
+              </p>
+              
+            </div>
+
+            <div class="card-body">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">1 country</li>
+                <li class="list-group-item">
+                  1 product/country/day</li>
+                <li class="list-group-item">5 picture products</li>
+                <li class="list-group-item">
+                  1 video per product</li>
+                  <li class="list-group-item"> 1 wholesaler per product</li>
+                  <li class="list-group-item">support live chat / mail</li>
+                  <li class="list-group-item"><h5 class="mb-0">${{ pack.amount }}/month</h5></li>
+              </ul>
+            </div>
+
+            <div class="card-footer bg-white py-3">
+               <a href="{{ path('app_subscriptions_add',{id: pack.id}) }}" type="button" class="btn  btn-sm text-white" style="background-color:#1A237E">Buy now</a>
+            </div>
+
+          </div>
+        {% endif %}
+      {% endfor %}
+      <!-- Card -->
+
+    </div>
+    <!--Grid column-->
+
+    {% for pack in packs %}
+      {% if pack.name == "Pack Gold" %}
+        <!--Grid column-->
+        <div class="col-lg-3 col-md-6 mb-4">
+
+          <!-- Card -->
+          <div class="card">
+
+            <div class="card-header bg-white py-3">
+              <p class="text-uppercase small mb-2">
+                <strong>{{ pack.name }}</strong>
+              </p>
+            </div>
+
+            <div class="card-body">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">2 country</li>
+                <li class="list-group-item">
+                  1 product/country/day</li>
+                <li class="list-group-item">5 picture products</li>
+                <li class="list-group-item">
+                  1 video per product</li>
+                  <li class="list-group-item"> 1 wholesaler per product</li>
+                  <li class="list-group-item">support live chat / mail</li>
+                  <li class="list-group-item"><h5 class="mb-0">${{ pack.amount }}/month</h5></li>
+              </ul>
+            </div>
+
+            <div class="card-footer bg-white py-3">
+              <a href="{{ path('app_subscriptions_add',{id: pack.id}) }}" type="button" class="btn btn-sm text-white" style="background-color:#1A237E">Buy now</a>
+            </div>
+
+          </div>
+
+        </div>
+      {% endif %}
+    {% endfor %}
+    <!-- Card -->
+    <!--Grid column-->
+    {% for pack in packs %}
+      {% if pack.name == "Pack Platinium" %}
+        <!--Grid column-->
+        <div class="col-lg-3 col-md-6 mb-4">
+
+          <!-- Card -->
+          <div class="card">
+
+            <div class="card-header bg-white py-3">
+              <p class="text-uppercase small mb-2">
+                <strong>{{ pack.name }}</strong>
+              </p>
+            </div>
+
+            <div class="card-body">
+             <ul class="list-group list-group-flush">
+                <li class="list-group-item">4 country</li>
+                <li class="list-group-item">
+                  1 product/country/day</li>
+                <li class="list-group-item">5 picture products</li>
+                <li class="list-group-item">
+                  1 video per product</li>
+                  <li class="list-group-item"> 1 wholesaler per product</li>
+                  <li class="list-group-item">support live chat / mail</li>
+                  <li class="list-group-item"><h5 class="mb-0">${{ pack.amount }}/month</h5></li>
+              </ul>
+            </div>
+
+            <div class="card-footer bg-white py-3">
+               <a href="{{ path('app_subscriptions_add',{id: pack.id}) }}" type="button" class="btn text-white btn-sm" style="background-color:#1A237E">Buy now</a>
+            </div>
+
+          </div>
+          <!-- Card -->
+
+        </div>
+      {% endif %}
+    {% endfor %}
+    <!--Grid column-->
+
+  </div>
+
+
+  <div class="row gx-lg-5 justify-content-center">
+
+    <!--Grid column-->
+
+    <!--Grid column-->
+    {% for pack in packs %}
+      {% if pack.name == "Pack Silver / 6" %}
+        <div class="col-lg-3 col-md-6 mb-4">
+          <!-- Card -->
+          <div class="card border border-primary">
+
+            <div class="card-header bg-white py-3">
+              <p class="text-uppercase small mb-2">
+                <strong>{{ pack.name }}</strong>
+              </p>
+              
+            </div>
+
+            <div class="card-body">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">1 country</li>
+                <li class="list-group-item">
+                  1 product/country/day</li>
+                <li class="list-group-item">5 picture products</li>
+                <li class="list-group-item">
+                  1 video per product</li>
+                  <li class="list-group-item"> 1 wholesaler per product</li>
+                  <li class="list-group-item">support live chat / mail</li>
+                  <li class="list-group-item"><h5 class="mb-0">${{ pack.amount }}/month</h5></li>
+              </ul>
+            </div>
+
+            <div class="card-footer bg-white py-3">
+               <a href="{{ path('app_subscriptions_add',{id: pack.id}) }}" type="button" class="btn text-white btn-sm" style="background-color:#1A237E">Buy now</a>
+            </div>
+
+          </div>
+        {% endif %}
+      {% endfor %}
+      <!-- Card -->
+
+    </div>
+    <!--Grid column-->
+
+    {% for pack in packs %}
+      {% if pack.name == "Pack Gold / 6" %}
+        <!--Grid column-->
+        <div class="col-lg-3 col-md-6 mb-4">
+
+          <!-- Card -->
+          <div class="card">
+
+            <div class="card-header bg-white py-3">
+              <p class="text-uppercase small mb-2">
+                <strong>{{ pack.name }}</strong>
+              </p>
+            </div>
+
+            <div class="card-body">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">2 country</li>
+                <li class="list-group-item">
+                  1 product/country/day</li>
+                <li class="list-group-item">5 picture products</li>
+                <li class="list-group-item">
+                  1 video per product</li>
+                  <li class="list-group-item"> 1 wholesaler per product</li>
+                  <li class="list-group-item">support live chat / mail</li>
+                  <li class="list-group-item"><h5 class="mb-0">${{ pack.amount }}/month</h5></li>
+              </ul>
+            </div>
+
+            <div class="card-footer bg-white py-3">
+              <a href="{{ path('app_subscriptions_add',{id: pack.id}) }}" type="button" class="btn text-white btn-sm" style="background-color:#1A237E">Buy now</a>
+            </div>
+
+          </div>
+
+        </div>
+      {% endif %}
+    {% endfor %}
+    <!-- Card -->
+    <!--Grid column-->
+    {% for pack in packs %}
+      {% if pack.name == "Pack Platinium / 6" %}
+        <!--Grid column-->
+        <div class="col-lg-3 col-md-6 mb-4">
+
+          <!-- Card -->
+          <div class="card">
+
+            <div class="card-header bg-white py-3">
+              <p class="text-uppercase small mb-2">
+                <strong>{{ pack.name }}</strong>
+              </p>
+            </div>
+
+            <div class="card-body">
+             <ul class="list-group list-group-flush">
+                <li class="list-group-item">4 country</li>
+                <li class="list-group-item">
+                  1 product/country/day</li>
+                <li class="list-group-item">5 picture products</li>
+                <li class="list-group-item">
+                  1 video per product</li>
+                  <li class="list-group-item"> 1 wholesaler per product</li>
+                  <li class="list-group-item">support live chat / mail</li>
+                  <li class="list-group-item"><h5 class="mb-0">${{ pack.amount }}/month</h5></li>
+              </ul>
+            </div>
+
+            <div class="card-footer bg-white py-3">
+               <a href="{{ path('app_subscriptions_add',{id: pack.id}) }}" type="button" class="btn text-white btn-sm" style="background-color:#1A237E">Buy now</a>
+            </div>
+
+          </div>
+          <!-- Card -->
+
+        </div>
+      {% endif %}
+    {% endfor %}
+    <!--Grid column-->
+
+  </div>
+</section>
+{% endif %}
+<!--Section: Content-->

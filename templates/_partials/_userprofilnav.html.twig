@@ -1,0 +1,56 @@
+<aside class="col-3 border border-light bg-white mt-4">
+
+
+	<article class="card mb-3">
+
+		<img src="/assets/images/LBO.jpg" class="card-img-top" style="height:150px"/>
+
+		{% if  not is_granted('ROLE_SELLER') %}
+			{% if  app.user.subscription.isPaid is defined and app.user.subscription.isPaid %}
+				<div class="card-header text-white" style="background-color:#1A237E">
+					<p class="text-white">
+						<a class="text-white" href="{{ path('profile_winning_products') }}">Liste des produits gagnants</a>
+					</p>
+				</div>
+			{% endif %}
+		{% endif %}
+		{% if is_granted('ROLE_SELLER') %}
+			{% if app.user and app.user.isVerified == true  %}
+				<div class="card-header text-white" style="background-color:#1A237E">
+					<p class="text-white">
+						<a class="text-white" href="{{ path('profile_index') }}">Dashboard</a>
+					</p>
+				</div>
+				<div class="card-header text-white" style="background-color:#1A237E">
+					<p>
+						<a class="text-white" href="{{ path('profile_products_index') }}">Liste de mes produits</a>
+					</p>
+					<p>
+						<a class="text-white" href="{{ path('profile_products_add') }}">Creer un produit</a>
+					</p>
+				</div>
+			{% endif %}
+		{% endif %}
+
+
+		<div class="card-header text-white" style="background-color:#1A237E">
+			<p>
+				<a class="text-white" href="{{ path('profile_orders') }}">Liste de mes commandes</a>
+			</p>
+		</div>
+		<div class="card-header text-white " style="background-color:#1A237E">
+			<p>
+				<a class="text-white" href="{{ path('address_index') }}">
+					Mes Addresses</a>
+			</p>
+			<p>
+				<a class="text-white" href="{{ path('address_add') }}">
+					Ajouter  une Addresse</a>
+			</p>
+			<p>
+				<a class="text-white" href="{{ path('forgotten_password') }}">Changer  de mot de passe</a>
+			</p>
+		</div>
+	</article>
+
+</aside>

@@ -1,0 +1,99 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProfileController!
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+    {% if is_granted('ROLE_USER') %}
+        {% include
+        "_partials/_userprofilnav.html.twig" %}
+        {% endif %}
+        <main class="col-9 border border-light bg-white p-2">
+            <hr class="hr hr-blurry" />
+            <h3>
+                {{ app.user.firstname }}!
+                <small class="text-muted">check today winning products</small>
+            </h3>
+            
+            <div class="row row-cols-1 row-cols-md-4 g-4 mt-0">
+
+                {% if subscription.isPaid == true %}
+                {% for winningproduct in winningproducts %}
+
+                
+                {% if winningproduct.createdAt|date('d') == "now"|date('d')%}
+                {% if subscription.createdAt|date('U') < winningproduct.createdAt|date('U') %}
+                <div class="col">
+                    <div class="card w-80">
+                        <td>
+
+                            <img src="{{ asset('assets/uploads/products/mini/300x300-' ~ winningproduct.product.images[0].name ) }}"
+                                alt="{{ winningproduct.product.name }}" class="img-thumbnail" />
+                        </td>
+                        <div class="card-body">
+                            <div class="d-flex justify-content-sm-end">
+                                <span class="badge bg-success btn-rounded" style="font-size:10px;">{{
+                                    winningproduct.createdAt|date('m/d/Y')}}</span>
+                            </div>
+                            <h5 class="card-title">{{ winningproduct.name }}</h5>
+                            <a href="{{path('products_details',{slug:winningproduct.product.slug}) }}" type="button"
+                                class="btn btn-outline-primary btn-rounded" data-mdb-ripple-color="dark">
+                                voir
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% endif %}
+                {% endfor %}
+            </div>
+            <hr class="hr hr-blurry" />
+            <h3>
+
+                Tous mes produits
+                <div class="row row-cols-1 row-cols-md-4 g-4 mt-0">
+                    {% for winningproduct in winningproducts %}
+                   
+                    {% if subscription.createdAt|date('U') < winningproduct.createdAt|date('U') %}
+
+                    <div class="col">
+                        <div class="card w-80">
+                            <td>
+
+                                <img src="{{ asset('assets/uploads/products/mini/300x300-' ~ winningproduct.product.images[0].name ) }}"
+                                    alt="{{ winningproduct.product.name }}" class="img-thumbnail" />
+                            </td>
+                            <div class="card-body">
+
+                                <div class="d-flex justify-content-sm-end">
+                                    <span class="badge text-white btn-rounded" style="font-size:10px;background-color:#1A237E">{{
+                                        winningproduct.createdAt|date('m/d/Y')}}</span>
+                                </div>
+
+                                <h5 class="card-title">{{ winningproduct.name }}</h5>
+                                <a href="{{path('products_details',{slug:winningproduct.product.slug}) }}" type="button"
+                                    class="btn btn-outline-primary btn-rounded" data-mdb-ripple-color="dark">
+                                    Voir
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    {% endif %}
+                    {% endfor %}
+
+
+            </h3>
+
+
+            {% else %}
+            Votre abonnent n'est pas actif
+            {% endif %}
+    </div>
+    </main>
+</div>
+</div>
+
+{% endblock %}

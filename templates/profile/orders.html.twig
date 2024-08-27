@@ -1,0 +1,134 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProfileController!{% endblock %}
+
+
+
+{% block body %}
+
+{% if  not is_granted("ROLE_SELLER")  %}
+<div class="container">
+        <div class="row">
+
+             {% include "_partials/_userprofilnav.html.twig" %}
+        
+            <main class="col-9 border border-light bg-white p-2">
+
+               <div class="container justify-content-center">
+                   <div class="row" >
+                      <div class="col-md-6 text-primary">Bienvenue {{app.user.firstname}}</div>
+                   </div>
+               </div>
+
+                <h3>Liste de mes  commandes</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Reference</th>
+                            <th>Total</th>
+                            <th> paiment</th>
+                            <th>Date</th>
+                            <th>Details</th>
+                            <th>Statut</th>
+            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for order in orders %}
+                        {% if order.isPaid == true %}
+                            <tr>
+                               <td>{{ order.Reference}}</td>
+                                <td>{{ order.total }} MAD</td>
+                                <td>{{ order.method }}</td>
+                                <td>{{ order.getcreatedAt()|date('d-m-Y H:i:s') }}</td>
+                                <td>
+                                    <a href="{{ path('profile_details', {reference: order.reference})}}" class="btn btn-primary">Details</a>
+                                </td>
+                                <td>
+                                    {% if order.status.name is defined and order.status.name == "En cours" %}
+                                            {% set name = " en cours" %}
+                                            {% set color = "primary" %}
+                                    {% endif %}
+                                     {% if order.status.name is defined and order.status.name == "Termine"  %}
+                                            {% set name = "accepte" %}
+                                            {% set color = "success" %}
+                                    {% endif %}
+                                    {% if order.status.name is defined and order.status.name == "Annule" %}
+                                            {% set name = "recjected" %}
+                                            {% set color = "warning" %}
+                                    {% endif %}
+                                        <span class="badge bg-{{ color }}">{{ name }}</span>
+                                 </td>
+                            </tr>  
+                            {% endif %}
+                        {% endfor %}
+                    </tbody>
+                    
+                </table>
+            </main>
+        </div>
+    </div>
+{% else %}
+<div class="container">
+
+        <div class="row">
+
+             {% include "_partials/_userprofilnav.html.twig" %}
+        
+            <main class="col-9 border border-light bg-white p-2">
+
+               <div class="container justify-content-center">
+                   <div class="row" >
+                      <div class="col-md-6 text-primary">Bienvenue {{app.user.firstname}}</div>
+                   </div>
+               </div>
+
+                <h3>Liste de mes  commandes</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Reference</th>
+                            <th>Total</th>
+                            <th>Date</th>
+                            <th>Details</th>
+                            <th>Statut</th>
+            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for sellerOrder in sellerOrders %}
+                           {% if sellerOrder.isPaid == true %}
+                          
+                            <tr>
+                               <td>{{ sellerOrder.Reference}}</td>
+                                <td>{{ sellerOrder.total }} MAD</td>
+                                <td>{{ sellerOrder.getcreatedAt()|date('d-m-Y H:i:s') }}</td>
+                                <td>
+                                    <a href="{{ path('profile_details', {reference: sellerOrder.reference})}}" class="btn text-white " style="background-color:#1A237E" >Details</a>
+                                </td>
+                                <td>
+                                    {% if sellerOrder.status.name is defined and sellerOrder.status.name == "En cours" %}
+                                            {% set name = " en cours" %}
+                                            {% set color = "primary" %}
+                                    {% endif %}
+                                     {% if sellerOrder.status.name is defined and sellerOrder.status.name == "Termine"  %}
+                                            {% set name = "accepte" %}
+                                            {% set color = "success" %}
+                                    {% endif %}
+                                    {% if sellerOrder.status.name is defined and sellerOrder.status.name == "Annule" %}
+                                            {% set name = "recjected" %}
+                                            {% set color = "warning" %}
+                                    {% endif %}
+                                        <span class="badge bg-{{ color }}">{{ name }}</span>
+                                 </td>
+                            </tr>  
+                           {% endif %}
+                        {% endfor %}
+                    </tbody>
+                    
+                </table>
+            </main>
+        </div>
+    </div>
+{% endif %}
+{% endblock %}

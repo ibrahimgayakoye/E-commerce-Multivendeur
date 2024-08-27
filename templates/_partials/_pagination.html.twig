@@ -1,0 +1,37 @@
+{% if pages > 1 %}
+	<div class="row" data-aos="fade-up">
+		<div class="col-md-12 text-center">
+			<div class="site-block-27">
+				<ul>
+					{% if currentPage > 1 %}
+						<li>
+							<a href="{{ path(path, {slug: slug, page: currentPage - 1}) }}">&lt;</a>
+						</li>
+					{% else %}
+						<li class="page-item disabled">
+							<a>&lt;</a>
+						</li>
+					{% endif %}
+					{% for page in 1..pages %}
+						<li class="page-item {{ (page == currentPage) ? 'active' : '' }}">
+							
+							<a href="{{ path(path, {slug: slug, page: page}) }}">{{ page }}</a>
+							
+						</li>
+					{% endfor %}
+					{% if currentPage < pages %}
+						<li>
+							
+							<a href="{{ path(path, {slug: slug, page: currentPage + 1}) }}">&gt;</a>
+						</li>
+					{% else %}
+						<li>
+							<a>&gt;</a>
+						</li>
+					{% endif %}
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+{% endif %}

@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des categories{% endblock %}
+
+{% block body %}
+   <div class="container">
+      <div class="row">
+         {% include "_partials/_adminnav.html.twig" %}
+         <main class="col-9 border border-light bg-light p-2">
+            <h1>Liste des categories</h1>
+            <table class="table">
+               <thead>
+                  <tr>
+                     <th>ID</th>
+                     <th>Nom</th>
+                     <th>Parent</th>
+                     <th>Slug</th>
+                     <th>Ordre</th>
+                     <th>Action</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  {% for categorie in categories %}
+                     <tr>
+                        <td>{{ categorie.id }}</td>
+                        <td>{{ categorie.name }}</td>
+                        <td>
+                           {% if categorie.parent is not null %}
+                              {{ categorie.parent.name }}
+                           {% endif %}
+                        </td>
+                        <td>{{ categorie.slug }}</td>
+                        <td>{{ categorie.categoryOrder }}</td>
+                        <td>
+                                    <a href="{{ path('admin_categories_edit', {id: categorie.id})}}" class="btn btn-primary">Modifier</a>
+                        </td>
+                        
+                     </tr>
+                  {% endfor %}
+               </tbody>
+            </table>
+         </main>
+      </div>
+   </div>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Liste des produits{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            {% include "_partials/_adminnav.html.twig" %}
+            <main class="col-9 border border-light bg-white p-2">
+                <h1>Liste des packs</h1>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nom</th>
+                            <th>description</th>
+                            <th>duree</th>
+                            <th>prix</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for pack in packs %}
+                            <tr>
+                                <td>{{ pack.id }}</td>
+                                <td>{{ pack.name }}</td>
+                                <td>{{ pack.description }}</td>
+                                <td>{{ pack.duration }}</td>
+                                <td>{{ pack.amount }}</td>
+                                <td>
+                                    <a href="{{ path('admin_packs_edit', {id: pack.id})}}" class="btn btn-primary">Modifier</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </main>
+        </div>
+    </div>
+{% endblock %}

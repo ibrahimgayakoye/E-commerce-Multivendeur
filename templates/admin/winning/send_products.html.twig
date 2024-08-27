@@ -1,0 +1,8 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+{{ form_start(form) }}
+    {{ form_row(form.countries) }}
+    {{ form_row(form.packs) }}
+    <button type="submit" class="btn btn-primary">{{ button_label|default('Envoyer') }}</button>
+{{ form_end(form) }}
+{% endblock %}

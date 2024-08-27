@@ -1,0 +1,10 @@
+vich_uploader:
+    db_driver: orm
+
+    metadata:
+       type: attribute
+    mappings:
+        products:
+           uri_prefix: /videos/products
+           upload_destination: '%kernel.project_dir%/public/videos/products'
+           namer: Vich\UploaderBundle\Naming\SmartUniqueNamer

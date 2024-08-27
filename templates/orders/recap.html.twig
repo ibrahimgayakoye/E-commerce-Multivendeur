@@ -1,0 +1,92 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello OrdersController!
+{% endblock %}
+
+{% block body %}
+
+	<div class="row">
+		<div class="col-md-6 mb-5 mb-md-0">
+			<h2 class="h3 mb-3 text-black">Addresse de livrason</h2>
+
+			<div class="p-3 p-lg-5 border">
+
+				<div class="form-check">
+				    <input type="radio" class="form-check-input" checked>
+					<label  class="form-check-label d-flex justify-content-between">
+					    <span class="d-block fs-base text-dark fw-medium mb-1">{{ delivery|replace({'[-br]': '</br>'})|raw }}</span>
+					</label>
+				</div>
+
+				<div class="form-check">
+					<h2 class="text"style="color:#1A237E">Mode de paiement</h2>
+				    <input type="radio" class="form-check-input" style="color:#1A237E" checked>
+					<label  class="form-check-label d-flex justify-content-between">
+					    {% if method =="stripe" %}
+					    <span class="d-block fs-base text-dark fw-medium mb-1" >{% set name ="carte visa" %}{{name}}</span>
+						{% else %}
+						 <span class="d-block fs-base text-dark fw-medium mb-1" >{{ method }}</span>
+						{% endif %}
+					</label>
+				</div>		
+			</div>
+		</div>
+
+
+		<div class="col-md-6">
+
+
+			<div class="row mb-5">
+				<div class="col-md-12">
+					<h2 class="h3 mb-3 text-black" style="color:#1A237E"> Recapitulatif de Votre commande : Reference - {{reference}}</h2>
+					<div class="p-3 p-lg-5 border">
+						<table class="table site-block-order-table mb-5">
+							<thead>
+								<th>Product</th>
+								<th>Image</th>
+								<th>Total</th>
+							</thead>
+							{% for element in data %}
+								<tbody>
+									<tr>
+										<td>{{ element.product.name }}
+											<strong class="mx-2">x{{ element.quantity }}</strong>
+										</td>
+										<td><img src="{{ asset('assets/uploads/products/mini/300x300-' ~ element.product.images[0].name ) }}" alt="{{ element.product.images[0].name }}" class="img-thumbnail"></td>
+										<td>{{ element.quantity * element.product.price  }}
+											MAD</td>
+									</tr>
+								{% endfor %}
+
+								<tr>
+									<td class="text-black font-weight-bold">
+										<strong>Order Total</strong>
+									</td>
+									<td class="text-black font-weight-bold">
+										<strong>{{ total }} MAD</strong>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+
+						{% if method == 'stripe' %}
+                        <form method="POST" action="{{ path('payment_stripe', {reference: reference}) }}">
+							<input type="submit" class="btn text-white " style="background-color:#1A237E" value="Payer par carte visa| {{ total }} MAD">
+						</form>
+                        {% else %}
+
+                        <form method="POST" action = "{{ path('payment_paypal', {reference: reference}) }}">
+							<input type="submit" class="btn text-white" style="background-color:#1A237E" value="Payer par Paypal| {{ total }} MAD">
+						</form>
+                        {% endif %}
+                        
+
+					</div>
+				</div>
+			</div>
+
+		</div>
+        
+	</div>
+	<!-- </form> -->
+</div></div>{% endblock %}

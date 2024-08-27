@@ -1,0 +1,9 @@
+{{ form_start(categorieForm) }}
+    {{ form_row(categorieForm.name) }}
+    {{ form_row(categorieForm.categoryOrder) }}
+   
+
+   
+
+    <button type="submit" class="btn btn-primary">{{ button_label|default('Ajouter') }}</button>
+{{ form_end(categorieForm) }}

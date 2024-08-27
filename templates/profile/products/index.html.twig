@@ -1,0 +1,58 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Liste de mes produits
+{% endblock %}
+
+{% block body %}
+<div class="container">
+	<div class="row">
+		{% include "_partials/_userprofilnav.html.twig" %}
+		<main class="col-9 border border-light bg-white p-2">
+			<h1>Liste de mes Produits</h1>
+			<table class="table">
+				<thead>
+					<tr>
+
+						<th>Photo</th>
+						<th>Nom</th>
+						<th>Prix</th>
+						<th>Stock</th>
+						<th>Catégorie</th>
+						<th>statut</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for produit in produits %}
+					<tr>
+
+						<td>{{ produit.id }}</td>
+                        <td><img src="{{ asset('assets/uploads/products/mini/300x300-' ~ produit.images[0].name ) }}" alt="{{ produit.name }}" class="img-thumbnail"></td>
+						<td>{{ produit.name }}</td>
+						<td>{{ produit.price }}
+							MAD</td>
+						<td>{{ produit.stock }}</td>
+						<td>{{ produit.categories.name }}</td>
+						<td>
+							{% if produit.statuts.name == "En cours" %}
+							{% set name = " en cours" %}
+							{% set color = "primary" %}
+							{% endif %}
+							{% if produit.statuts.name == "Termine" %}
+							{% set name = "accepte" %}
+							{% set color = "success" %}
+							{% endif %}
+							{% if produit.statuts.name == "Annule" %}
+							{% set name = "recjected" %}
+							{% set color = "warning" %}
+							{% endif %}
+							<span class="badge bg-{{ color }}">{{ name }}</span>
+						</td>
+
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</main>
+	</div>
+</div>
+{% endblock %}
